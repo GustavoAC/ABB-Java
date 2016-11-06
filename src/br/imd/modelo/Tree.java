@@ -40,12 +40,16 @@ public class Tree {
 	        this.root = root;
 	}
 	
+	/* Insere um Aluno na árvore, de acordo com as informações passadas por parâmetro
+	 */ 
 	public void insereAluno(int matricula, String nome) {
         Aluno aluno = new Aluno(matricula, nome);
         No no = new No(aluno);
         inserir(no);
     }
-
+	
+	/* Insere um No na árvore
+	 */ 
 	public void inserir(No no) {
 		if(this.root == null) {
 		   this.root = no;
@@ -62,6 +66,9 @@ public class Tree {
 		}
 	}
 	
+	/* Insere um No na árvore
+	 * Imprimindo no console os eventos 
+	 */
 	public void inserirVisual(No no, MyCanvas canvas) {
 		if(this.root == null) {
 			System.out.println("O lugar foi encontrado");
@@ -93,6 +100,10 @@ public class Tree {
 		}
 	}
 	
+	/* Remove um No da árvore
+	 * O No a ser removido é determinado pela matricula passada por parâmetro  
+	 * A função retorna true se o No for removido e false caso contrário
+	 */
 	public boolean remove (int matricula) {
 		if (this.root == null) {
 			return false;
@@ -175,6 +186,11 @@ public class Tree {
 		return true;
 	}
 	
+	/* Remove um No da árvore
+	 * Imprimindo no console os eventos 
+	 * O No a ser removido é determinado pela matricula passada por parâmetro  
+	 * A função retorna true se o No for removido e false caso contrário
+	 */
 	public boolean removeVisual (MyCanvas canvas, int matricula) {
 		if (this.root == null) {
 			System.out.println("Arvore vazia");
@@ -326,6 +342,11 @@ public class Tree {
 		return true;
 	}
 	
+	/* Busca um No na árvore
+	 * O No a ser buscado é determinado pela matricula passada por parâmetro
+	 * A função retorna o No em questão, se ele for encontrado
+	 * Ou um No vazio, caso contrário  
+	 */
 	public No busca(int matricula) {
 		// Se nao encontrar, retorna no vazio
 		if (root == null)
@@ -342,6 +363,12 @@ public class Tree {
 		}
 	}
 	
+	/* Busca um No na árvore
+	 * Imprimindo no console os eventos 
+	 * O No a ser buscado é determinado pela matricula passada por parâmetro
+	 * A função retorna o No em questão, se ele for encontrado
+	 * Ou um No vazio, caso contrário  
+	 */
 	public No buscaVisual(MyCanvas canvas, int matricula) {
 		// Se nao encontrar, retorna no vazio
 		if (root == null) {
