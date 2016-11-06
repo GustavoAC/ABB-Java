@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
@@ -92,7 +91,7 @@ public class MyCanvas extends JPanel {
 	/* Remove as informações guardadas sobre o nó passado
 	 * por parâmetro
 	 */
-	public void removeNode(No no) {		
+	public void removeNode(No no) {	
 		nodeReferences.remove(no);
 		nodeColor.remove(no);
 		nodePosition.remove(no);
@@ -100,6 +99,12 @@ public class MyCanvas extends JPanel {
 		redraw();
 	}
 
+	/* Atribui a posição do segundo nó para o primeiro */
+	public void changeNodePos(No orig, No dest) {
+		nodePosition.put(orig, nodePosition.get(dest));
+		shapes.put(orig, shapes.get(dest));
+	}
+	
 	/* Muda a cor externa do nó para verde, dando foco ao mesmo.
 	 */
 	public void highlightNode(No no) {
@@ -117,7 +122,7 @@ public class MyCanvas extends JPanel {
 	/* Limpa o canvas */
 	public void clear() {
 		graphic.setColor(Color.WHITE);
-		graphic.fill(new Rectangle(0, 0, this.getWidth(), this.getHeight()));
+		graphic.fillRect(0, 0, this.getWidth(), this.getHeight());
 		graphic.setColor(Color.BLACK);
 	}
 	

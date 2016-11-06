@@ -26,6 +26,7 @@ public class TreeDrawer {
 		this.tree = tree;
 		canvas = new MyCanvas("Representacao visual", width, height);
 		drawTree();
+		canvas.redraw();
 	}
 	
 	/* Função que desenha a árvore no canvas
@@ -34,6 +35,11 @@ public class TreeDrawer {
 	 * correta a cada um eles para a função do canvas que armazena os nos
 	 */
 	public void drawTree() {
+		if (tree.getRoot() == null) {
+			System.out.println("�rvore vazia");
+			return;
+		}
+		
 		int leftX = 0;
 		int rightX = canvas.getWidth();
 		int currDepth = 1;
@@ -105,7 +111,8 @@ public class TreeDrawer {
 		System.out.println("=== Inserir ===");
 		tree.inserirVisual(no, canvas);
 		drawTree();
-		System.out.println("Insercao do " + no.getAluno().getMatricula() + " foi concluido");
+		canvas.redraw();
+		System.out.println("Insercao do " + no.getAluno().getMatricula() + " foi concluida");
 		System.out.println();
 	}
 	
@@ -115,8 +122,11 @@ public class TreeDrawer {
 		boolean resultado = tree.removeVisual(canvas, matricula);
 		canvas.clear();
 		drawTree();
-		System.out.println("Remocao de "+ matricula +" feita com sucesso");
-		System.out.println();
+		canvas.redraw();
+		if (resultado) {
+			System.out.println("Remocao de " + matricula + " feita com sucesso");
+			System.out.println();
+		}
 		return resultado; 
 	}	 
 }

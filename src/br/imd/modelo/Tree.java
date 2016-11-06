@@ -113,8 +113,8 @@ public class Tree {
 				this.root = null;
 			} else if (this.leftTree != null && this.rightTree == null) {
 				this.root = this.leftTree.root;
-				this.leftTree = this.leftTree.leftTree;
 				this.rightTree = this.leftTree.rightTree;
+				this.leftTree = this.leftTree.leftTree;
 			} else if (this.leftTree == null && this.rightTree != null) {
 				this.root = this.rightTree.root;
 				this.leftTree = this.rightTree.leftTree;
@@ -196,6 +196,7 @@ public class Tree {
 			System.out.println("Arvore vazia");
 			return false;
 		}
+		
 		System.out.println("Buscando no " + matricula + " para remover");
 		pause();
 		if (this.root.getAluno().getMatricula() == matricula) {
@@ -204,22 +205,27 @@ public class Tree {
 			pause();
 			if (this.leftTree == null && this.rightTree == null) {
 				System.out.println("No nao tem filhos");
+				canvas.unHighlightNode(root);
+				canvas.removeNode(this.root);
 				this.root = null;
 				pause();
-				canvas.unHighlightNode(root);
 			} else if (this.leftTree != null && this.rightTree == null) {
 				System.out.println("No tem um filho");
 				pause();
 				System.out.println("Filho da esquerda fica no seu lugar");
+				canvas.changeNodePos(this.leftTree.root, this.root);
+				canvas.removeNode(this.root);
 				this.root = this.leftTree.root;
-				this.leftTree = this.leftTree.leftTree;
 				this.rightTree = this.leftTree.rightTree;
+				this.leftTree = this.leftTree.leftTree;
 				pause();
 				canvas.unHighlightNode(root);
 			} else if (this.leftTree == null && this.rightTree != null) {
 				System.out.println("No tem um filho");
 				pause();
 				System.out.println("Filho da direita fica no seu lugar");
+				canvas.changeNodePos(this.rightTree.root, this.root);
+				canvas.removeNode(this.root);
 				this.root = this.rightTree.root;
 				this.leftTree = this.rightTree.leftTree;
 				this.rightTree = this.rightTree.rightTree;
@@ -242,6 +248,8 @@ public class Tree {
 				System.out.println("Maior elemento encontrado");
 				pause();
 				canvas.unHighlightNode(atual.root);
+				canvas.changeNodePos(atual.root, this.root);
+				canvas.removeNode(this.root);
 				this.root = atual.root;
 				if (ant == this) {
 					this.leftTree = atual.leftTree;
@@ -252,9 +260,9 @@ public class Tree {
 				canvas.unHighlightNode(root);
 			}
 			
-			canvas.removeNode(root);
 			return true;
 		}
+		
 		Tree ant = null;
 		Tree atual = this;
 		while (atual != null && atual.root.getAluno().getMatricula() != matricula) {
@@ -278,39 +286,46 @@ public class Tree {
 			return false;
 		}
 		
+		canvas.highlightNode(atual.root);
 		if (atual.leftTree == null && atual.rightTree == null) {
 			System.out.println("No nao tem filhos");
+			pause();
+			
+			canvas.unHighlightNode(atual.root);
+			canvas.removeNode(atual.root);
+			
 			if (ant.leftTree == atual) {
 				ant.leftTree = null;
 			} else {
 				ant.rightTree = null;
 			}
-			pause();
-			canvas.unHighlightNode(atual.root);
 		} else if (atual.leftTree != null && atual.rightTree == null) {
 			System.out.println("No tem um filho");
 			pause();
+			System.out.println("Filho da esquerda fica no seu lugar");
+			canvas.changeNodePos(atual.leftTree.root, atual.root);
+			canvas.unHighlightNode(atual.root);
+			canvas.removeNode(atual.root);
+			
 			if (ant.leftTree == atual) {
-				System.out.println("Filho da esquerda fica no seu lugar");
 				ant.leftTree = atual.leftTree;
 			} else {
-				System.out.println("Filho da esquerda fica no seu lugar");
 				ant.rightTree = atual.leftTree;
 			}
-			pause();
-			canvas.unHighlightNode(atual.root);
+			
 		} else if (atual.leftTree == null && atual.rightTree != null) {
 			System.out.println("No tem um filho");
 			pause();
+			System.out.println("Filho da direita fica no seu lugar");
+			canvas.changeNodePos(atual.rightTree.root, atual.root);
+			canvas.unHighlightNode(atual.root);
+			canvas.removeNode(atual.root);
+			
 			if (ant.leftTree == atual) {
-				System.out.println("Filho da direita fica no seu lugar");
 				ant.leftTree = atual.rightTree;
 			} else {
-				System.out.println("Filho da direita fica no seu lugar");
 				ant.rightTree = atual.rightTree;
 			}
-			pause();
-			canvas.unHighlightNode(atual.root);
 		} else {
 			System.out.println("No tem dois filhos");
 			pause();
@@ -327,18 +342,21 @@ public class Tree {
 			}
 			System.out.println("Maior elemento encontrado");
 			pause();
+			
+			canvas.changeNodePos(atual2.root, atual.root);
+			canvas.unHighlightNode(atual.root);
 			canvas.unHighlightNode(atual2.root);
+			canvas.removeNode(atual.root);
+
 			atual.root = atual2.root;
 			if (ant2 == atual) {
 				atual.leftTree = atual2.leftTree;
 			} else {
 				ant2.rightTree = atual2.leftTree;
 			}
-			pause();
-			canvas.unHighlightNode(atual.root);
 		}
 		
-		canvas.removeNode(atual.root);
+		pause();
 		return true;
 	}
 	
