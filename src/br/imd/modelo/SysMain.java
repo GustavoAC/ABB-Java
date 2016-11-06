@@ -7,49 +7,29 @@ import br.imd.visao.TreeDrawer;
 public class SysMain {
 	public static void main(String[] args) {
 		Tree t = new Tree();
-		t.insereAluno(4, "asd");
-		t.insereAluno(2, "asdad");
-		t.insereAluno(1, "qwe");
-		t.insereAluno(3, "asd");
-		t.insereAluno(6, "glubglub");
-		t.insereAluno(5, "qweqweqwe");
-		t.insereAluno(8, "dadaad");
-		
-		No n = t.busca(4);
-		System.out.println(n.getAluno().getNome());
-		
-		/*
-		MyCanvas canvas = new MyCanvas("WOOW", 300, 300);
-		canvas.drawNode(n, 50, 50);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		canvas.highlightNode(n);
-		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		canvas.unHighlightNode(n);
-		*/
+		t.insereAluno(4, "Pedro");
 		
 		TreeDrawer td = new TreeDrawer(t, 800, 400);
-		//td.percorrerPreOrdem();
-		//td.percorrerInOrdem();
-		//td.percorrerPosOrdem();
-		//td.insereAluno(7, "ksfdjksfhj");
-		//td.remove(4);
-		td.remove(4);
-		td.percorrerPreOrdem();
 		
-		System.out.println("== Fim das a��es do programa ==");
+		td.insereAluno(2, "Cristina");
+		td.insereAluno(1, "João");
+		td.insereAluno(3, "Paulo");
+		td.insereAluno(6, "Bruna");
+		td.insereAluno(5, "Yuri");
+		td.insereAluno(8, "Érica");
+		No n = td.busca(6);
+		System.out.println("Nome do aluno: " + n.getAluno().getNome());
+		System.out.println();
+		td.percorrerPreOrdem();
+		td.percorrerInOrdem();
+		td.percorrerPosOrdem();
+		td.remove(1);
+		td.remove(2);
+		td.remove(6);
+		td.remove(8);
+		td.remove(4);
+		td.remove(3);
+		
+		System.out.println("== Fim das ações do programa ==");
 	}
 }
